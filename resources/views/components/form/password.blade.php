@@ -1,12 +1,17 @@
-@props(['label', 'value' => null, 'error' => null])
+@props(['label', 'value' => null, 'error' => null, 'required' => false])
 
 <div class="flex w-full flex-col gap-2">
-    <label for="{{ $attributes->get('id') }}" class="text-sm font-medium text-primary-800">{{ $label }}</label>
+    <label for="{{ $attributes->get('id') }}" class="text-sm font-medium text-primary-800 dark:text-gray-200">
+        {{ $label }}
+        @if ($required)
+            <span class="text-primary-400">*</span>
+        @endif
+    </label>
     <div x-data="{ showPassword: false }" class="relative">
         <input
             :type="showPassword ? 'text' : 'password'"
             id="passwordInput"
-            class="appearance-none block shadow-md text-gray-900 w-full sm:text-sm px-3 py-2 border border-primary-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+            class="appearance-none bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200 shadow-md w-full sm:text-sm block px-3 py-2 border border-primary-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 placeholder:text-gray-400 dark:placeholder:text-gray-500"
             name="password"
             autocomplete="current-password"
             {{ $attributes->merge(['value' => $value]) }}

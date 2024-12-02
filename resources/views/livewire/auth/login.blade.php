@@ -1,25 +1,25 @@
-<div class="flex justify-center items-center h-app-height bg-primary-100">
-    <div class="w-full max-w-xl space-y-8 rounded-lg shadow-md mx-2 bg-white p-6 md:p-12 sm:p-20">
+<div class="flex justify-center items-center h-app-height bg-primary-100 dark:bg-gray-800">
+    <div class="w-full max-w-xl space-y-8 rounded-lg shadow-md mx-2 bg-white dark:bg-gray-900 p-6 md:p-12 sm:p-20">
         <div class="flex flex-col items-center">
-            <x-icon.logo class="size-16"/>
-            <h2 class="mt-6 text-center text-3xl font-extrabold text-primary-900">Sign in to your account</h2>
+            <x-icon.logo class="size-16 text-primary-500"/>
+            <h2 class="mt-6 text-center text-3xl font-extrabold text-primary-900 dark:text-white">Sign in to your account</h2>
         </div>
         <form class="mt-8 space-y-6" action="#" method="POST">
             <input type="hidden" name="remember" value="true">
             <div class="flex flex-col gap-4 ">
-                <x-form.input type="email" name="email" label="Email address" placeholder="john@example.com" />
-                <x-form.password name="password" label="Password" />
+                <x-form.input id="email" type="email" name="email" label="Email address" placeholder="john@example.com" wire:model="email"/>
+                <x-form.password name="password" label="Password" wire:model="password"/>
             </div>
 
             <div class="flex items-center justify-between">
-                <x-form.checkbox label="Remember me" id="remember" name="remember" />
+                <x-form.checkbox label="Remember me" id="remember" name="remember" wire:model="remember" />
 
                 <div class="text-sm">
-                    <a href="#" class="font-medium text-primary-500 hover:text-primary-600">Forgot password?</a>
+                    <x-text-link :href="route('forgot-password')" class="font-medium">Forgot password?</x-text-link>
                 </div>
             </div>
 
-            <x-button>
+            <x-button wire:click="authenticate">
                 Sign in
             </x-button>
         </form>
@@ -44,7 +44,7 @@
         </div>
 
         <div class="text-center text-sm text-gray-500">
-            Don't have an account? <a href="#" class="font-medium text-primary-500 hover:text-primary-600">Create one here</a>
+            Don't have an account? <x-text-link :href="route('register')" class="font-medium">Register</x-text-link>
         </div>
     </div>
 </div>

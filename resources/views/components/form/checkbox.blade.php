@@ -5,7 +5,7 @@
            id="{{ $id }}"
            name="{{ $name }}"
            type="checkbox"
-           {{ $attributes->merge(['class' => 'h-4 w-4 rounded border-primary-300 text-primary-700 focus:ring-primary-700 focus:ring-offset-0']) }}
+           {{ $attributes->merge(['class' => 'h-4 w-4 rounded border-primary-300 text-primary-700 focus:ring-primary-700 focus:ring-offset-0 dark:bg-gray-800 dark:border-gray-600']) }}
            @checked($checked)
            @disabled($disabled)
     >
