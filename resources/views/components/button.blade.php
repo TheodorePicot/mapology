@@ -1,32 +1,33 @@
-@props(['type' => 'button', 'variant' => 'primary', 'href' => null, 'iconLeft' => null, 'iconRight' => null])
+@props(['type' => 'button', 'variant' => 'primary', 'href' => null, 'iconLeft' => null, 'iconRight' => null, 'iconType' => null, 'width' => 'w-full'])
 
 @php
-    $baseClasses = 'inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium';
+    $baseClasses = 'inline-flex items-center justify-center px-4 py-2 border rounded-md shadow-sm text-sm font-medium';
     $variantClasses = match($variant) {
-        'secondary' => 'text-gray-700 bg-gray-200 hover:bg-gray-300 focus:ring-gray-500 dark:text-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600',
-        default => 'text-white bg-primary hover:bg-primary-700 focus:ring-primary-500 dark:bg-primary-900 dark:hover:bg-primary-800',
+        'primary-outline' => 'text-primary-800 border border-primary-500 bg-white hover:bg-gray-100 focus:ring-primary-500 dark:text-primary-900 dark:bg-gray-700 dark:hover:bg-gray-600',
+        'secondary' => 'text-gray-700 border-transparent bg-primary-100 hover:bg-primary-200 focus:ring-gray-500 dark:text-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600',
+        default => 'text-white bg-primary-800 border-transparent hover:bg-primary-700 focus:ring-primary-500 dark:bg-primary-900 dark:hover:bg-primary-800',
     };
     $classes = "$baseClasses $variantClasses";
 @endphp
 
 @if ($href)
-    <a href="{{ $href }}" {{ $attributes->merge(['class' => $classes]) }}>
+    <a href="{{ $href }}" {{ $attributes->merge(['class' => "$classes $width"]) }}>
         @if($iconLeft)
-            <span class="mr-2">{{ $iconLeft }}</span>
+            <x-dynamic-component :component="$iconLeft" class="size-5 mr-2"/>
         @endif
         {{ $slot }}
         @if($iconRight)
-            <span class="ml-2">{{ $iconRight }}</span>
+            <x-dynamic-component :component="$iconRight" class="size-5"/>
         @endif
     </a>
 @else
-    <button type="{{ $type }}" {{ $attributes->merge(['class' => $classes]) }}>
+    <button type="{{ $type }}" {{ $attributes->merge(['class' => "$classes $width"]) }}>
         @if($iconLeft)
-            <span class="mr-2">{{ $iconLeft }}</span>
+            <x-dynamic-component :component="$iconLeft" class="size-5"/>
         @endif
         {{ $slot }}
         @if($iconRight)
-            <span class="ml-2">{{ $iconRight }}</span>
+            <x-dynamic-component :component="$iconRight" class="size-5"/>
         @endif
     </button>
 @endif

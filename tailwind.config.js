@@ -15,7 +15,7 @@ export default {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                'oxley': {
+                'primary': {
                     '50': '#f5f8f7',
                     '100': '#dcebe4',
                     '200': '#b9d6c9',
@@ -28,9 +28,14 @@ export default {
                     '900': '#273a33',
                     '950': '#13201d',
                 },
-                'primary' : '#2c433c'
+            },
+            height: {
+                'app-height': 'calc(100vh - 73px)',
             }
         },
     },
-    plugins: [],
+    plugins: [
+        require('@tailwindcss/typography'),
+        require('@tailwindcss/forms'),
+    ],
 };
