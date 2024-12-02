@@ -16,7 +16,7 @@
     </head>
     <body class="font-sans antialiased">
         <x-base.navigation/>
-        <main class="bg-primary-100">
+        <main>
             {{ $slot }}
         </main>
         <x-base.footer/>

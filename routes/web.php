@@ -11,3 +11,7 @@ Route::get('/', function () {
 Route::get('/register', Register::class)->name('register');
 
 Route::get('/login', Login::class)->name('login');
+
+Route::get('/learn', Login::class)->name('learn');
+
+Route::get('/quizzes', Login::class)->name('quizzes');

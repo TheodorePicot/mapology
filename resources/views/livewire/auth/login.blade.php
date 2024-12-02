@@ -1,4 +1,4 @@
-<div class="flex justify-center items-center h-app-height">
+<div class="flex justify-center items-center h-app-height bg-primary-100">
     <div class="w-full max-w-xl space-y-8 rounded-lg shadow-md mx-2 bg-white p-6 md:p-12 sm:p-20">
         <div class="flex flex-col items-center">
             <x-icon.logo class="size-16"/>
