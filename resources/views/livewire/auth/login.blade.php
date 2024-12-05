@@ -15,7 +15,12 @@
                 <x-form.checkbox label="Remember me" id="remember" name="remember" wire:model="remember" />
 
                 <div class="text-sm">
-                    <x-text-link :href="route('forgot-password')" class="font-medium">Forgot password?</x-text-link>
+                    <x-text-link
+                        :href="route('forgot-password', $email ? ['email' => $email] : [])"
+                        class="font-medium"
+                    >
+                        Forgot password?
+                    </x-text-link>
                 </div>
             </div>
 
