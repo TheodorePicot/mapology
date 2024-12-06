@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
+use Psy\Util\Str;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
@@ -24,6 +26,7 @@ class User extends Authenticatable
         'last_name',
         'email',
         'password',
+        'avatar',
     ];
 
     /**
@@ -53,5 +56,29 @@ class User extends Authenticatable
     public function isNotBanned(): bool
     {
         return $this->banned_at === null;
+    }
+
+    protected function uploadAvatar($avatarSource)
+    {
+        if (!$avatarSource) {
+            return null;
+        }
+
+        $extension = $this->getImageExtension($avatarSource);
+        if (!$extension) {
+            return null;
+        }
+
+        $profilePictureName = Str::random();
+        $fullProfilePictureName = "{$profilePictureName}.{$extension}";
+
+        if (is_string($avatarSource)) {
+            $imageContents = file_get_contents($avatarSource);
+            Storage::disk('public')->put("users/img/{$fullProfilePictureName}", $imageContents);
+        } else {
+            $avatarSource->storeAs('users/img/', $fullProfilePictureName, 'public');
+        }
+
+        $this->update(['avatar' => $fullProfilePictureName]);
     }
 }

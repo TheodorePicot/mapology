@@ -11,31 +11,42 @@
     </p>
 
     <form action="#" class="flex flex-col w-full my-2 gap-3">
-        <div class="flex flex-col gap-3 sm:flex-row w-full">
-            <x-form.input id="first-name"
-                          type="text"
-                          name="first-name"
-                          label="First Name"/>
+        <div class="flex-row sm:flex gap-6 items-start justify-center">
+            <div class="my-3 sm:my-0 sm:mx-10 text-center">
+                <div class="my-2 text-sm font-medium text-primary-800 dark:text-gray-200">Avatar</div>
+                <x-form.avatar />
+            </div>
+            <div class="flex flex-col gap-3 w-full flex-1">
+                <x-form.input id="first-name"
+                              type="text"
+                              wire:model="first_name"
+                              name="first_name"
+                              label="First Name"/>
 
-            <x-form.input id="last-name"
-                          type="text"
-                          name="last-name"
-                          label="Last Name"/>
+                <x-form.input id="last_name"
+                              type="text"
+                              wire:model="last_name"
+                              name="last_name"
+                              label="Last Name"/>
+            </div>
         </div>
-
         <x-form.input id="email"
-                      type="text"
+                      type="email"
                       name="email"
+                      placeholder="john@example.com"
+                      wire:model="email"
                       label="Email"
                       required/>
 
         <x-form.password id="password"
                          name="password"
+                         wire:model="password"
                          label="Password"
                          required/>
 
         <x-form.password id="password-confirmation"
-                         name="password-confirmation"
+                         name="password_confirmation"
+                         wire:model="password_confirmation"
                          label="Password Confirmation"
                          required/>
 
@@ -52,7 +63,7 @@
             </p>
 
             <div class="flex gap-4 items-center">
-                <x-button class="flex-1">
+                <x-button class="flex-1" wire:click="submit">
                     Create an account
                 </x-button>
 

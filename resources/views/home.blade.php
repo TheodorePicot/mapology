@@ -1,4 +1,4 @@
-<x-layouts.layout>
+<x-layouts.front.base>
     <div class="container mx-auto py-8">
         <h1 class="text-4xl font-bold text-center text-primary-700 mb-4">Welcome to Mapology</h1>
         <p class="text-lg text-center text-gray-600">
@@ -13,4 +13,4 @@
             </x-button>
         </div>
     </div>
-</x-layouts.layout>
+</x-layouts.front.base>

@@ -14,9 +14,10 @@
                           name="email"
                           label="Email address"
                           placeholder="john@example.com"
-                          wire:model.live.debounce="email"/>
+                          wire:model.live="email"/>
 
-            <x-form.password name="password"
+            <x-form.password id="password"
+                             name="password"
                              label="Password"
                              wire:model="password"/>
         </div>
