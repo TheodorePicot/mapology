@@ -3,14 +3,14 @@
 namespace App\Livewire\Auth;
 
 use App\Models\User;
-use Illuminate\Support\Str;
-use Livewire\Attributes\Layout;
-use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Livewire\Attributes\Layout;
+use Livewire\Component;
 
-#[Layout('layouts.layout')]
+#[Layout('layouts.front.auth')]
 class Login extends Component
 {
     public $email = '';

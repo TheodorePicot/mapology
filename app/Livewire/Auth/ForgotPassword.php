@@ -8,11 +8,10 @@ use Illuminate\Cache\RateLimiter;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
-use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-#[Layout('layouts.layout')]
+#[Layout('layouts.front.auth')]
 class ForgotPassword extends Component
 {
     public $email;

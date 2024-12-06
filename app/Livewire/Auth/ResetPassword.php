@@ -5,14 +5,12 @@ namespace App\Livewire\Auth;
 use App\Models\User;
 use App\Rules\Password;
 use App\Services\PasswordResetService;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
 
-#[Layout('layouts.layout')]
+#[Layout('layouts.front.auth')]
 class ResetPassword extends Component
 {
     #[Locked]

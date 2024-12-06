@@ -20,7 +20,9 @@ Route::middleware('guest')->group(function () {
 
     Route::get('/forgot-password', ForgotPassword::class)->name('forgot-password');
 
-    Route::get('/reset-password/{token}', ResetPassword::class)->name('forgot-password');
+    Route::get('/reset-password/{token}', ResetPassword::class)
+//        ->middleware('ensure-password-reset-token-is-valid')
+        ->name('reset-password');
 });
 
 

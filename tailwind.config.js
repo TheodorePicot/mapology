@@ -31,6 +31,9 @@ export default {
             },
             height: {
                 'app-height': 'calc(100vh - 73px)',
+            },
+            minHeight: {
+                'app-height': 'calc(100vh - 73px)',
             }
         },
     },

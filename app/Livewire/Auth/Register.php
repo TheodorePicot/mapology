@@ -6,7 +6,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Component;
 
 
-#[Layout('layouts.layout')]
+#[Layout('layouts.front.auth')]
 class Register extends Component
 {
 }

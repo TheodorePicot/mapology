@@ -13,7 +13,8 @@
             id="passwordInput"
             class="appearance-none bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200 shadow-md w-full sm:text-sm block px-3 py-2 border border-primary-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 placeholder:text-gray-400 dark:placeholder:text-gray-500"
             name="password"
-            autocomplete="current-password"
+            placeholder="••••••••"
+            autocomplete="new-password"
             {{ $attributes->merge(['value' => $value]) }}
             {{ $error ? 'aria-invalid="true" aria-describedby="' . $error->id . '-error"' : '' }}
         />
