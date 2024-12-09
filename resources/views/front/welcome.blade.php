@@ -1,14 +1,6 @@
 <x-layouts.front.base>
     <div class="container mx-auto py-8">
-        <div class="absolute left-0 top-0 w-1/3 h-screen" id="confetti-left"></div>
-        <div class="absolute right-0 top-0 w-1/3 h-screen" id="confetti-right"></div>
-        <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-        <script>
-            confetti.create(document.getElementById('confetti-left'), { fade: true, resize: true, gravity: 0.5 });
-            confetti.create(document.getElementById('confetti-right'), { fade: true, resize: true, gravity: 0.5 });
-            confetti.left.start();
-            confetti.right.start();
-        </script>
+
         <h1 class="text-4xl font-bold text-center text-primary-700 mb-4">
             Hello, {{ auth()->user()->name }}!
         </h1>
@@ -29,4 +21,14 @@
             </p>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/confetti-js@0.0.18/dist/index.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const confettiSettings = { target: 'my-canvas' };
+            const confetti = new ConfettiGenerator(confettiSettings);
+            confetti.render();
+        });
+    </script>
+    <canvas id="my-canvas" class="w-full h-full fixed top-0 left-0 pointer-events-none"></canvas>
 </x-layouts.front.base>
