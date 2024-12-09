@@ -15,10 +15,11 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('email')->unique();
-            $table->string('first_name')->nullable();
-            $table->string('last_name')->nullable();
+            $table->string('name');
             $table->string('password');
             $table->string('avatar')->nullable();
+            $table->string('google_oauth_id')->nullable();
+            $table->string('github_oauth_id')->nullable();
             $table->timestamp('banned_at')->nullable();
             $table->boolean('deactivated_at')->nullable();
             $table->timestamp('email_verified_at')->nullable();

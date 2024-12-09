@@ -15,7 +15,8 @@
         @livewireScripts
     </head>
     <body class="font-sans antialiased">
-        <x-base.navigation/>
+        <x-base.navigation />
+        <x-flash.flash-base />
         <main>
             {{ $slot }}
         </main>

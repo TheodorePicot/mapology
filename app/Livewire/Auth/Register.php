@@ -2,9 +2,12 @@
 
 namespace App\Livewire\Auth;
 
+use App\Enums\OauthAction;
+use App\Mail\Welcome;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -15,9 +18,7 @@ class Register extends Component
 {
     use WithFileUploads;
 
-    public $first_name;
-
-    public $last_name;
+    public $name;
 
     public $email;
 
@@ -25,17 +26,23 @@ class Register extends Component
 
     public $password_confirmation;
 
-
-    #[Validate('required|image|max:1024')]
+    #[Validate('nullable|image|max:1024')]
     public $avatar;
+
+    public $oauthAction;
+
+    public function mount()
+    {
+        $this->oauthAction = OauthAction::Register;
+    }
+
 
     public function submit()
     {
         $this->validate();
 
         $user = User::create([
-            'first_name' => $this->first_name,
-            'last_name' => $this->last_name,
+            'name' => $this->name,
             'email' => $this->email,
             'password' => Hash::make($this->password),
         ]);
@@ -43,6 +50,8 @@ class Register extends Component
         if ($this->avatar) {
             $user->uploadAvatar($this->avatar);
         }
+
+        Mail::to($user->email)->queue(new Welcome($user));
 
         Auth::login($user);
 
@@ -52,8 +61,7 @@ class Register extends Component
     protected function rules()
     {
         return [
-            'first_name' => ['string', 'max:255', 'nullable'],
-            'last_name' => ['string', 'max:255', 'nullable'],
+            'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'confirmed', 'min:8'],
             'password_confirmation' => ['required', 'min:8'],
@@ -63,8 +71,7 @@ class Register extends Component
     protected function validationAttributes()
     {
         return [
-            'first_name' => 'first name',
-            'last_name' => 'last name',
+            'name' => 'name',
             'email' => 'email',
             'password' => 'password',
             'password_confirmation' => 'password confirmation',

@@ -1,0 +1,40 @@
+.globe {
+    border: 2px solid #1C2D6B;
+    background-color: #6287C5;
+    border-radius: 50%;
+    height: 500px;
+    overflow: hidden;
+    width: 500px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(0, 0, 0, 0.5); /* Add 3D effect */
+
+    svg {
+        animation: rotation 40s linear infinite;
+
+        path {
+            stroke: #1C2D6B;
+            fill: #65BC49;
+        }
+    }
+}
+
+.globe path:hover {
+    cursor: pointer;
+}
+
+@keyframes rotation {
+    from {
+        transform: translateX(0);
+    }
+
+    from {
+        transform: translateX(-50%);
+    }
+}
+
+
+
+.globe path.highlighted {
+    fill: rgba(39, 125, 61, 0.5); /* Light green highlight */
+    border: 2px solid rgba(39, 125, 61, 0.8); /* Add border */
+    transition: fill 0.3s ease, stroke-width 0.3s ease, transform 0.3s ease, border 0.3s ease; /* Smooth transition */
+}

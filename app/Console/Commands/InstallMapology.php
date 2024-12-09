@@ -40,8 +40,7 @@ class InstallMapology extends Command
             $user = User::create(
                 [
                     'email' => $email,
-                    'first_name' => 'Admin',
-                    'last_name' => 'istrator',
+                    'name' => 'Administrator',
                     'password' => bcrypt($password),
                 ]
             );

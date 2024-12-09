@@ -3,18 +3,20 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Traits\PictureSource;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
-use Psy\Util\Str;
+use Illuminate\Support\Str;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasRoles;
+    use HasFactory, Notifiable, HasRoles, PictureSource;
 
     /**
      * The attributes that are mass assignable.
@@ -22,8 +24,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'first_name',
-        'last_name',
+        'name',
         'email',
         'password',
         'avatar',
@@ -53,12 +54,26 @@ class User extends Authenticatable
         ];
     }
 
+    protected function avatar(): Attribute
+    {
+        return Attribute::make(
+            get: function ($value) {
+                if ($value) {
+                    return Storage::disk('public')->exists('users/img/'.$value)
+                        ? Storage::disk('public')->url('users/img/'.$value)
+                        : asset('images/default-avatar.webp');
+                }
+                return asset('images/default-avatar.webp');
+            },
+        );
+    }
+
     public function isNotBanned(): bool
     {
         return $this->banned_at === null;
     }
 
-    protected function uploadAvatar($avatarSource)
+    public function uploadAvatar($avatarSource)
     {
         if (!$avatarSource) {
             return null;
