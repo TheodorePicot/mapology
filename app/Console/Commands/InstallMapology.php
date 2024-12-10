@@ -6,7 +6,6 @@ use App\Enums\UserRole;
 use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\DB;
 
 class InstallMapology extends Command
 {
@@ -40,7 +39,7 @@ class InstallMapology extends Command
             $user = User::create(
                 [
                     'email' => $email,
-                    'name' => 'Administrator',
+                    'username' => 'administrator',
                     'password' => bcrypt($password),
                 ]
             );

@@ -15,22 +15,23 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('email')->unique();
-            $table->string('name');
+            $table->string('username')->unique();
             $table->string('password');
             $table->string('avatar')->nullable();
+            $table->string('description')->nullable();
             $table->string('google_oauth_id')->nullable();
             $table->string('github_oauth_id')->nullable();
             $table->timestamp('banned_at')->nullable();
-            $table->boolean('deactivated_at')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
-            $table->string('email')->primary();
+            $table->string('email')->index();
             $table->string('token');
             $table->timestamp('created_at')->nullable();
+            $table->timestamp('expires_at')->nullable();
         });
 
         Schema::create('sessions', function (Blueprint $table) {

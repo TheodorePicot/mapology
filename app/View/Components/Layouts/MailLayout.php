@@ -25,6 +25,6 @@ class MailLayout extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('layouts.layout');
+        return view('layouts.mail-layout');
     }
 }

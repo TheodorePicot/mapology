@@ -28,10 +28,11 @@
         </div>
 
         <div class="flex flex-col gap-4 mt-2">
-            <x-form.input id="name"
+            <x-form.input id="username"
                           type="text"
-                          wire:model="name"
-                          name="name"
+                          wire:model="username"
+                          placeholder="geography_lover123"
+                          name="username"
                           label="Display name"
                           required
             />
@@ -73,7 +74,7 @@
                             Create an account
                         </span>
 
-                        <x-icon.spinner wire:loading wire:target="submit" class="size-5 ml-2 text-primary-600 dark:text-primary-400" />
+                        <x-icon.spinner wire:loading.flex wire:target="submit" class="size-5 ml-2 text-white" />
                     </x-button>
 
                     <p class="text-sm flex-1 text-primary-800 dark:text-gray-200">

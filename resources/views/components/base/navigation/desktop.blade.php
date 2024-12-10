@@ -32,7 +32,7 @@
                  x-transition:leave-start="opacity-100 transform scale-100"
                  x-transition:leave-end="opacity-0 transform scale-90">
                 <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-                    <div>{{ auth()->user()->name }}</div>
+                    <div>{{ auth()->user()->username }}</div>
                     <div class="font-medium truncate">{{ auth()->user()->email }}</div>
                 </div>
                 <div class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownUserAvatarButton">
@@ -46,7 +46,7 @@
                 <div class="py-2 pb-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownUserAvatarButton">
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button type="submit" class="block w-full px-4 text-start py-2 text-sm text-gray-700 hover:text-red-700 hover:bg-red-200">Logout</button>
+                        <button type="submit" class="block w-full px-4 text-start py-2 text-sm text-gray-700 hover:text-red-700 hover:font-semibold hover:bg-red-200">Logout</button>
                     </form>
                 </div>
             </div>

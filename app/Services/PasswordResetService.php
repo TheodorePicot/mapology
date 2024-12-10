@@ -66,7 +66,7 @@ class PasswordResetService
      */
     private function getPasswordResetByToken(string $token)
     {
-        return DB::table('password_resets')->where('token', $token)->first();
+        return DB::table('password_reset_tokens')->where('token', $token)->first();
     }
 
     /**
@@ -76,7 +76,7 @@ class PasswordResetService
      */
     private function getPasswordResetByEmail(string $email)
     {
-        return DB::table('password_resets')->where(['email' => $email])->first();
+        return DB::table('password_reset_tokens')->where(['email' => $email])->first();
     }
 
     /**
@@ -96,6 +96,6 @@ class PasswordResetService
      */
     public function deletePasswordReset(string $token)
     {
-        DB::table('password_resets')->where('token', $token)->delete();
+        DB::table('password_reset_tokens')->where('token', $token)->delete();
     }
 }

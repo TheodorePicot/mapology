@@ -5,6 +5,8 @@ use App\Livewire\Auth\ForgotPassword;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
 use App\Livewire\Auth\ResetPassword;
+use App\Livewire\Auth\VerifyEmail;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -23,15 +25,24 @@ Route::middleware('auth')->group(function () {
         return redirect()->route('home');
     })->name('logout');
 
+    Route::get('/email/verify', VerifyEmail::class)->name('verification.notice');
+
+    Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+        $request->fulfill();
+
+        return redirect('/home');
+    })->middleware(['auth', 'signed'])->name('verification.verify');
+
     Route::view('/welcome', 'front.welcome')->name('welcome');
 
-    Route::get('/dashboard', function () {})->name('dashboard');
-
     Route::get('/settings', function () {})->name('settings');
+    Route::middleware('verified')->group(function () {
+        Route::get('/dashboard', function () {})->name('dashboard');
 
-    Route::get('/quizzes/create', function () {})->name('quizzes.create');
+        Route::get('/quizzes/create', function () {})->name('quizzes.create');
 
-    Route::get('/wikis/create', function () {})->name('wikis.create');
+        Route::get('/wikis/create', function () {})->name('wikis.create');
+    });
 });
 
 Route::middleware('guest')->group(function () {

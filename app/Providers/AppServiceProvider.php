@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,9 +12,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton(Connection::class, function (Application $app) {
-            return new Connection(config('riak'));
-        });
+//        VerifyEmail::toMailUsing(function ($notifiable) {
+//            return (new VerifyEmail()) ->subject('Verify Email Address')
+//                ->view('emails.verify-email', ['url' => $notifiable->verifyEmailUrl()]);
+//        });
     }
 
     /**

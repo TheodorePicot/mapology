@@ -45,10 +45,10 @@
     <x-form.separator message="Or continue with"/>
 
     <div class="flex items-center w-full space-x-4">
-        <x-button variant="secondary" href="#" icon-left="icon.social.google">
+        <x-button variant="secondary" href="{{ route('redirect.provider',  [App\Enums\OauthProvider::Google, $this->oauthAction]) }}" icon-left="icon.social.google">
             Google
         </x-button>
-        <x-button variant="secondary" href="#" icon-left="icon.social.github">
+        <x-button variant="secondary" href="{{ route('redirect.provider',  [App\Enums\OauthProvider::Github, $this->oauthAction]) }}" icon-left="icon.social.github">
             GitHub
         </x-button>
     </div>

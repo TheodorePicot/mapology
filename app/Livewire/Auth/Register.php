@@ -4,7 +4,10 @@ namespace App\Livewire\Auth;
 
 use App\Enums\OauthAction;
 use App\Mail\Welcome;
+use App\Mail\VerifyEmail as VerifyEmailMail;
 use App\Models\User;
+use App\Rules\Username;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -18,7 +21,7 @@ class Register extends Component
 {
     use WithFileUploads;
 
-    public $name;
+    public $username;
 
     public $email;
 
@@ -42,7 +45,7 @@ class Register extends Component
         $this->validate();
 
         $user = User::create([
-            'name' => $this->name,
+            'username' => $this->username,
             'email' => $this->email,
             'password' => Hash::make($this->password),
         ]);
@@ -51,7 +54,9 @@ class Register extends Component
             $user->uploadAvatar($this->avatar);
         }
 
+        event(new Registered($user));
         Mail::to($user->email)->queue(new Welcome($user));
+//        Mail::to($user->email)->queue(new VerifyEmailMail($user));
 
         Auth::login($user);
 
@@ -61,7 +66,7 @@ class Register extends Component
     protected function rules()
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
+            'username' => ['required', new Username],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'confirmed', 'min:8'],
             'password_confirmation' => ['required', 'min:8'],
@@ -71,7 +76,7 @@ class Register extends Component
     protected function validationAttributes()
     {
         return [
-            'name' => 'name',
+            'username' => 'display name',
             'email' => 'email',
             'password' => 'password',
             'password_confirmation' => 'password confirmation',

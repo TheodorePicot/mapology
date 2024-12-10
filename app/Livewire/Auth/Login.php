@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Auth;
 
+use App\Enums\OauthAction;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
@@ -16,6 +17,13 @@ class Login extends Component
     public $email = '';
     public $password = '';
     public $remember = false;
+
+    public $oauthAction;
+
+    public function mount()
+    {
+        $this->oauthAction = OauthAction::Login;
+    }
 
     public function authenticate()
     {

@@ -11,7 +11,9 @@
         <input
             x-ref="input"
             {{ $attributes->merge(['class' => 'appearance-none bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200 shadow-md w-full sm:text-sm block px-3 py-2 border border-primary-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 placeholder:text-gray-400 dark:placeholder:text-gray-500' . ($errors->has($name) ? ' border-red-600' : '')]) }}
-                x-on:input="$refs.input.classList.remove('border-red-600');$refs.input.classList.add('border-primary-300 dark:border-gray-600')"
+                @if ($errors->has($name))
+                    x-on:input="$refs.input.classList.remove('border-red-600')"
+                @endif
                 type="{{ $type }}"
                 name="{{ $name }}"
                 placeholder="{{ $placeholder }}"

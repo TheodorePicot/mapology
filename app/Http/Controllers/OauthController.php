@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Enums\OauthAction;
 use App\Enums\OauthProvider;
+use App\Mail\Welcome;
 use App\Models\User;
 use App\Services\OauthService;
+use App\Services\UsernameService;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -19,6 +23,7 @@ class OauthController extends Controller
      */
     public function __construct(
         protected OauthService $oauthService,
+        protected UsernameService $usernameService,
     )
     {
     }
@@ -83,13 +88,16 @@ class OauthController extends Controller
 
         if (!$userExists) {
             $user = User::create([
-                'name' => $socialiteUserInfo->name,
+                'username' => $this->usernameService->formatNameToNickname($socialiteUserInfo->name),
                 'email' => $socialiteUserInfo->email,
                 'password' => Hash::make(Str::random()),
+                'email_verified_at' => now(),
                 $provider . '_oauth_id' => $socialiteUserInfo->id,
             ]);
 
             $user->uploadAvatar($socialiteUserInfo->avatar);
+
+            Mail::to($user->email)->queue(new Welcome($user));
 
             Auth::login($user);
             return redirect()->route('welcome');
