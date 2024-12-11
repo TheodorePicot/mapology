@@ -20,6 +20,15 @@
                           placeholder="john@example.com"/>
         </div>
 
+        <div class="my-0 text-center text-sm justify-center flex space-x-2 text-gray-600 dark:text-gray-400">
+            <div>
+                Didn't receive the email?
+            </div>
+            <x-text-link :href="route('register')" class="font-medium">
+                Resend it
+            </x-text-link>
+        </div>
+
         <x-button wire:click="submitForgotPasswordRequest" icon-left="heroicon-o-key">
             Send password reset link
         </x-button>

@@ -3,6 +3,7 @@
 namespace App\Livewire\Auth;
 
 use App\Mail\ForgotPassword as ForgotPasswordMail;
+use App\Models\PasswordResetToken;
 use Carbon\Carbon;
 use Illuminate\Cache\RateLimiter;
 use Illuminate\Support\Facades\DB;
@@ -15,6 +16,8 @@ use Livewire\Component;
 class ForgotPassword extends Component
 {
     public $email;
+
+    public bool $submitted;
 
     public function mount()
     {
@@ -32,22 +35,25 @@ class ForgotPassword extends Component
         $createdAt = Carbon::now();
         $expiresAt = Carbon::now()->addMinutes(30);
 
-        $passwordReset = DB::table('password_reset_tokens')->where('email', $this->email)->first();
+        $passwordReset = PasswordResetToken::where('email', $this->email)->first();
 
-        if (filled($passwordReset) && Carbon::parse($passwordReset->expires_at)->isPast()) {
-            DB::table('password_reset_tokens')->where('email', $this->email)->delete();
-        } else if (filled($passwordReset)) {
-            session()->flash('warning', 'You have already requested a password reset. Please try again after 30 minutes or send a new mail.');
+        if (filled($passwordReset) && $passwordReset->expires_at->isPast()) {
+            $passwordReset->delete();
+            $passwordReset = null;
         }
 
-        DB::table('password_reset_tokens')->insert([
-            'email' => $this->email,
-            'token' => $token,
-            'created_at' => $createdAt,
-            'expires_at' => $expiresAt
-        ]);
+        if (!filled($passwordReset)) {
+            PasswordResetToken::create([
+                'email' => $this->email,
+                'token' => $token,
+                'created_at' => $createdAt,
+                'expires_at' => $expiresAt
+            ]);
 
-        Mail::to($this->email)->queue(new ForgotPasswordMail($this->email, $token, $expiresAt));
+            Mail::to($this->email)->queue(new ForgotPasswordMail($this->email, $token, $expiresAt));
+
+            $this->submitted = true;
+        }
     }
 
     public function sendNewPasswordResetMail()
@@ -55,17 +61,17 @@ class ForgotPassword extends Component
         $throttleKey = Str::lower($this->email) . '|password-reset|' . request()->ip();
 
         if (RateLimiter::tooManyAttempts($throttleKey, 3)) {
-            session()->flash('warning', 'You have tried sending a new mail too many times.');
+            $this->dispatch('flash', 'warning', 'You have tried sending a new mail too many times.');
             return;
         }
 
-        $passwordReset = DB::table('password_reset_tokens')->where('email', $this->email)->first();
+        $passwordReset = PasswordResetToken::where('email', $this->email)->first();
 
         if ($passwordReset && !$passwordReset->expires_at->isPast()) {
             Mail::to($this->email)->queue(new ForgotPasswordMail($this->email, $passwordReset->token, $passwordReset->expires_at));
             RateLimiter::hit($throttleKey);
         } else {
-            session()->flash('warning', 'No active password reset request found.');
+            $this->dispatch('flash', 'warning', 'No active password reset request found.');
         }
     }
 }
