@@ -1,6 +1,6 @@
 <x-layouts.mail-layout :title="__('Reset your password') . ' - Mapology'" :show-unsubscribe-footer="false">
     <tr>
-        <td style="padding: 20px; text-align: left; font-size: 16px; line-height: 1.5; color: #333333;">
+        <td style="padding: 20px; text-align: left; font-size: 16px; line-height: 1.5; color: #333333; background-color: #ffffff; border-radius: 10px;">
             <h2 style="margin: 0; font-size: 20px; color: #333333;">Hi,</h2>
             <p style="margin: 15px 0; color: #555555;">
                 You are receiving this email because we received a password reset request for your account.

@@ -34,7 +34,7 @@ class ForgotPassword extends Component
 
         $passwordReset = DB::table('password_reset_tokens')->where('email', $this->email)->first();
 
-        if (filled($passwordReset) && $passwordReset->expires_at->isPast()) {
+        if (filled($passwordReset) && Carbon::parse($passwordReset->expires_at)->isPast()) {
             DB::table('password_reset_tokens')->where('email', $this->email)->delete();
         } else if (filled($passwordReset)) {
             session()->flash('warning', 'You have already requested a password reset. Please try again after 30 minutes or send a new mail.');

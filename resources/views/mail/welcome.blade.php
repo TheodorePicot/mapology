@@ -1,6 +1,6 @@
 <x-layouts.mail-layout :title="__('Welcome to Mapology!') . ' - Mapology'" :show-unsubscribe-footer="false">
     <tr>
-        <td style="padding: 20px; text-align: left; font-size: 16px; line-height: 1.5; color: #333333;">
+        <td style="padding: 20px; text-align: left; font-size: 16px; line-height: 1.5; color: #333333; background-color: #ffffff; border-radius: 10px;">
             <h2 style="margin: 0; font-size: 20px; color: #333333;">Hi,</h2>
             <p style="margin: 15px 0; color: #555555;">
                 Congratulations on creating your account! You are now ready to embark on an exciting journey exploring the world of maps and geography. Dive into our interactive quizzes and educational content to enhance your knowledge.

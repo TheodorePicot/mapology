@@ -22,10 +22,10 @@ class ForgotPassword extends Mailable
     public function __construct(
         public string $email,
         public string $token,
-        public Carbon $expiresAt,
+        public $expiresAt,
     )
     {
-        $this->url = route('password.reset', ['token' => $token]);
+        $this->url = route('reset-password', ['token' => $token]);
     }
 
     /**

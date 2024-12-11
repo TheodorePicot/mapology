@@ -24,7 +24,7 @@
                     class="cursor-pointer rounded-full h-10 w-10"
                 />
             </div>
-            <div x-show="open" class="absolute right-4 top-14 mt-2 w-48 bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg py-1" @click.away="open = false"
+            <div x-show="open" x-cloak class="absolute right-4 top-14 mt-2 w-48 bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg py-1" @click.away="open = false"
                  x-transition:enter="transition ease-out duration-200"
                  x-transition:enter-start="opacity-0 transform scale-90"
                  x-transition:enter-end="opacity-100 transform scale-100"

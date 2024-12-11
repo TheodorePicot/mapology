@@ -2,16 +2,31 @@
 
 namespace App\Livewire\Auth;
 
+
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\RateLimiter;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
 #[Layout('layouts.front.auth')]
 class VerifyEmail extends Component
 {
-    public function resendPassword() {
-        if (Auth::check()) {
+    public function resendEmail()
+    {
+        $throttleKey = 'email.verification.' . Auth::id();
+        RateLimiter::clear($throttleKey);
+
+        if (RateLimiter::tooManyAttempts($throttleKey, 3)) {
+            $seconds = RateLimiter::availableIn($throttleKey);
+            $this->dispatch('flash', 'error', __("You've resent the verification email too many times. Please try again in :time.", [
+                'time' => $seconds > 60
+                    ? __(':minutes minutes', ['minutes' => ceil($seconds / 60)])
+                    : __(':seconds seconds', ['seconds' => $seconds])
+            ]));
+        } else {
             Auth::user()->sendEmailVerificationNotification();
+            RateLimiter::hit($throttleKey, 300);
+            $this->dispatch('flash', 'success', 'Verification email resent.');
         }
     }
 }

@@ -30,12 +30,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
         $request->fulfill();
 
-        return redirect('/home');
-    })->middleware(['auth', 'signed'])->name('verification.verify');
+        return redirect('/dashboard');
+    })->middleware(['signed'])->name('verification.verify');
 
     Route::view('/welcome', 'front.welcome')->name('welcome');
 
     Route::get('/settings', function () {})->name('settings');
+
     Route::middleware('verified')->group(function () {
         Route::get('/dashboard', function () {})->name('dashboard');
 
