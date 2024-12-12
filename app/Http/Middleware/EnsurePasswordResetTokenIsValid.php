@@ -2,11 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use App\Services\PasswordResetService;
+use App\Models\PasswordResetToken;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 
 class EnsurePasswordResetTokenIsValid
@@ -16,9 +14,17 @@ class EnsurePasswordResetTokenIsValid
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, string $token): Response
+    public function handle(Request $request, Closure $next): Response
     {
-        (new PasswordResetService())->checkIfExistsByToken($token);
+        $passwordReset = PasswordResetToken::where('token', $request->route('token'))->first();
+        if (is_null($passwordReset)) {
+            return redirect()->route('home')->with('error', "Password reset token doesn't exist");
+        }
+
+        if (!empty($passwordReset) && $passwordReset->isExpired()) {
+            $passwordReset->delete();
+            return redirect()->route('home')->with('error', 'Password reset token has expired');
+        }
 
         return $next($request);
     }

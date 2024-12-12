@@ -6,13 +6,28 @@
     </h1>
 
     <div class="flex flex-col lg:flex-row gap-4 mt-6">
-        <x-button class="flex-1" href="{{ route('redirect.provider',  [App\Enums\OauthProvider::Github, $this->oauthAction]) }}" variant="primary-outline" icon-left="icon.social.github">
-            Continue with GitHub
-        </x-button>
-
-        <x-button class="flex-1" href="{{ route('redirect.provider',  [App\Enums\OauthProvider::Google, $this->oauthAction]) }}" variant="primary-outline" icon-left="icon.social.google">
-            Continue with Google
-        </x-button>
+        <div class="flex-1" x-data="{clicked: false}">
+            <x-button href="{{ route('redirect.provider',  [App\Enums\OauthProvider::Github, $this->oauthAction]) }}" variant="primary-outline" @click="clicked=true">
+                <div x-show="!clicked">
+                    <x-icon.social.github class="size-5 mr-3" />
+                </div>
+                <x-icon.spinner x-show="clicked" x-cloak class="size-5 mr-3 text-primary-900 dark:text-white"/>
+                <span :class="clicked ? 'opacity-50 dark:opacity-70' : 'opacity-100'" >
+                    Continue with GitHub
+                </span>
+            </x-button>
+        </div>
+        <div class="flex-1" x-data="{clicked: false}">
+            <x-button href="{{ route('redirect.provider',  [App\Enums\OauthProvider::Google, $this->oauthAction]) }}" variant="primary-outline" @click="clicked=true">
+                <div x-show="!clicked">
+                    <x-icon.social.google class="size-5 mr-3" />
+                </div>
+                <x-icon.spinner x-show="clicked" x-cloak class="size-5 mr-3 text-primary-900 dark:text-white"/>
+                <span :class="clicked ? 'opacity-50 dark:opacity-70' : 'opacity-100'">
+                    Continue with Google
+                </span>
+            </x-button>
+        </div>
     </div>
 
     <div class="my-6">
@@ -69,12 +84,8 @@
                 </p>
 
                 <div class="flex gap-4 items-center">
-                    <x-button class="flex-1" wire:click="submit">
-                        <span wire:loading.class="opacity-50" wire:target="submit">
-                            Create an account
-                        </span>
-
-                        <x-icon.spinner wire:loading.flex wire:target="submit" class="size-5 ml-2 text-white" />
+                    <x-button class="flex-1" wire:click="submit" wire-target="submit">
+                        {{  __('Create an account') }}
                     </x-button>
 
                     <p class="text-sm flex-1 text-primary-800 dark:text-gray-200">

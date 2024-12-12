@@ -17,7 +17,7 @@
     <body class="font-sans antialiased">
         <x-base.navigation />
         <livewire:flash-base />
-        <main>
+        <main class="pt-nav">
             {{ $slot }}
         </main>
         <x-base.footer/>

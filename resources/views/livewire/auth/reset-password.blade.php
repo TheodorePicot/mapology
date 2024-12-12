@@ -15,15 +15,17 @@
 
             <x-form.password name="password"
                              label="Password"
+                             id="password"
                              wire:model="password"/>
 
             <x-form.password name="password_confirmation"
+                             id="password_confirmation"
                              label="Password Confirmation"
                              wire:model="password_confirmation"/>
         </div>
 
-        <x-button wire:click="submitForgotPasswordRequest" icon-left="heroicon-o-key" class="mt-4">
-            Send password reset link
+        <x-button wire:click="resetPassword" wire-target="resetPassword" icon-left="heroicon-o-key" class="mt-4">
+            Reset password
         </x-button>
     </form>
 </div>

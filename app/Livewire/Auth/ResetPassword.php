@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Auth;
 
+use App\Models\PasswordResetToken;
 use App\Models\User;
 use App\Rules\Password;
 use App\Services\PasswordResetService;
@@ -30,15 +31,18 @@ class ResetPassword extends Component
             'password_confirmation' => 'required|same:password'
         ]);
 
-        $passwordResetService = new PasswordResetService();
+        $passwordReset = PasswordResetToken::where('token', $this->token)->first();
 
-        $passwordResetService->checkIfExistsByEmailAndByToken($this->email, $this->token);
+        if ($passwordReset->isExpired()) {
+            $passwordReset->delete();
+            return redirect()->route('home')->with('error', 'Password reset token has expired, ask for a new one.');
+        }
 
         User::where('email', $validatedData['email'])
             ->update(['password' => Hash::make($validatedData['password'])]);
 
-        $passwordResetService->deletePasswordReset($this->token);
+        $passwordReset->delete();
 
-        return to_route('login')->with('message', 'Your password has been changed!');
+        return to_route('login')->with('success', 'Your password has been reset!');
     }
 }

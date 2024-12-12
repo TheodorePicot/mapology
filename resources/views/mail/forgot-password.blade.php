@@ -16,7 +16,7 @@
                 <a href="{{ $url }}" style="font-weight: bold; color: #6a9c89; text-decoration: none;">{{ $url }}</a>
             </p>
             <p style="margin: 15px 0; color: #555555;">
-                This password reset link will expire in {{ $expiresInMinutes }} minutes.
+                This password reset link will expire in {{ $expiresAt->diffInMinutes(now()) }} minutes.
                 <br>
                 If you did not request a password reset, no further action is required.
             </p>

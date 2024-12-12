@@ -30,7 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
         $request->fulfill();
 
-        return redirect('/dashboard');
+        return redirect('/dashboard')->with('success', 'Your email has been verified.');
     })->middleware(['signed'])->name('verification.verify');
 
     Route::view('/welcome', 'front.welcome')->name('welcome');
@@ -57,7 +57,6 @@ Route::middleware('guest')->group(function () {
         ->middleware('ensure-password-reset-token-is-valid')
         ->name('reset-password');
 
-    // Social authentication routes
     Route::get('/oauth/{provider}/{action}', [OauthController::class, 'redirectToProvider'])->name('redirect.provider');
 
     Route::get('/callback/{provider}', [OauthController::class, 'handleProviderCallback'])
@@ -72,3 +71,5 @@ Route::get('/quizzes', function () {})->name('quizzes');
 Route::get('/privacy-policy', function (){})->name('privacy-policy');
 
 Route::get('/terms-and-conditions', function (){})->name('terms-and-conditions');
+
+Route::get('/become-contributor', function (){})->name('become-contributor');

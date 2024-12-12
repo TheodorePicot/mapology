@@ -6,6 +6,7 @@ use App\Enums\OauthAction;
 use App\Mail\Welcome;
 use App\Mail\VerifyEmail as VerifyEmailMail;
 use App\Models\User;
+use App\Rules\Password;
 use App\Rules\Username;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
@@ -56,7 +57,6 @@ class Register extends Component
 
         event(new Registered($user));
         Mail::to($user->email)->queue(new Welcome($user));
-//        Mail::to($user->email)->queue(new VerifyEmailMail($user));
 
         Auth::login($user);
 
@@ -68,8 +68,8 @@ class Register extends Component
         return [
             'username' => ['required', new Username],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
-            'password' => ['required', 'confirmed', 'min:8'],
-            'password_confirmation' => ['required', 'min:8'],
+            'password' => ['required', 'confirmed', new Password],
+            'password_confirmation' => ['required'],
         ];
     }
 

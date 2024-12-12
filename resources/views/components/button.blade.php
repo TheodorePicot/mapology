@@ -1,4 +1,4 @@
-@props(['type' => 'button', 'variant' => 'primary', 'href' => null, 'iconLeft' => null, 'iconRight' => null, 'iconType' => null, 'width' => 'w-full'])
+@props(['type' => 'button', 'variant' => 'primary', 'href' => null, 'iconLeft' => null, 'iconRight' => null, 'iconType' => null, 'width' => 'w-full', 'wireTarget' => null])
 
 @php
     $baseClasses = 'inline-flex items-center justify-center px-4 py-2 border rounded-md shadow-sm text-sm font-medium';
@@ -10,24 +10,18 @@
     $classes = "$baseClasses $variantClasses";
 @endphp
 
+@php
+    $buttonContent = function() use ($iconLeft, $iconRight, $wireTarget, $slot) {
+        return view('components.button-content', compact('iconLeft', 'iconRight', 'wireTarget', 'slot'))->render();
+    };
+@endphp
+
 @if ($href)
     <a href="{{ $href }}" {{ $attributes->merge(['class' => "$classes $width"]) }}>
-        @if($iconLeft)
-            <x-dynamic-component :component="$iconLeft" class="size-5 mr-2"/>
-        @endif
-        {{ $slot }}
-        @if($iconRight)
-            <x-dynamic-component :component="$iconRight" class="size-5"/>
-        @endif
+        {!! $buttonContent() !!}
     </a>
 @else
     <button type="{{ $type }}" {{ $attributes->merge(['class' => "$classes $width"]) }}>
-        @if($iconLeft)
-            <x-dynamic-component :component="$iconLeft" class="size-5 mr-2"/>
-        @endif
-        {{ $slot }}
-        @if($iconRight)
-            <x-dynamic-component :component="$iconRight" class="size-5"/>
-        @endif
+        {!! $buttonContent() !!}
     </button>
 @endif

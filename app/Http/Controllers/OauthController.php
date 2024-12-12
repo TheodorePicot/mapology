@@ -99,7 +99,7 @@ class OauthController extends Controller
 
             Mail::to($user->email)->queue(new Welcome($user));
 
-            Auth::login($user);
+            Auth::login($user, true);
             return redirect()->route('welcome');
         } else {
             Auth::login($userExists);

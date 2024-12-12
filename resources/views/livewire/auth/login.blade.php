@@ -37,20 +37,36 @@
             </div>
         </div>
 
-        <x-button wire:click="authenticate">
+        <x-button wire:click="authenticate" wire-target="authenticate">
             Sign in
         </x-button>
     </form>
 
     <x-form.separator message="Or continue with"/>
 
-    <div class="flex items-center w-full space-x-4">
-        <x-button variant="secondary" href="{{ route('redirect.provider',  [App\Enums\OauthProvider::Google, $this->oauthAction]) }}" icon-left="icon.social.google">
-            Google
-        </x-button>
-        <x-button variant="secondary" href="{{ route('redirect.provider',  [App\Enums\OauthProvider::Github, $this->oauthAction]) }}" icon-left="icon.social.github">
-            GitHub
-        </x-button>
+    <div class="flex flex-col md:flex-row  md:items-center w-full gap-4">
+        <div class="w-full md:flex-1" x-data="{clicked: false}">
+            <x-button href="{{ route('redirect.provider',  [App\Enums\OauthProvider::Github, $this->oauthAction]) }}" variant="primary-outline" @click="clicked=true">
+                <div x-show="!clicked">
+                    <x-icon.social.github class="size-5 mr-3" />
+                </div>
+                <x-icon.spinner x-show="clicked" x-cloak class="size-5 mr-3 text-primary-900 dark:text-white" />
+                <span :class="clicked ? 'opacity-50 dark:opacity-70' : 'opacity-100'" >
+                    Continue with GitHub
+                </span>
+            </x-button>
+        </div>
+        <div class="w-full md:flex-1" x-data="{clicked: false}">
+            <x-button href="{{ route('redirect.provider',  [App\Enums\OauthProvider::Google, $this->oauthAction]) }}" variant="primary-outline" @click="clicked=true">
+                <div x-show="!clicked">
+                    <x-icon.social.google class="size-5 mr-3" />
+                </div>
+                <x-icon.spinner x-show="clicked" x-cloak class="size-5 mr-3 text-primary-900 dark:text-white" />
+                <span :class="clicked ? 'opacity-50 dark:opacity-70' : 'opacity-100'">
+                    Continue with Google
+                </span>
+            </x-button>
+        </div>
     </div>
 
     <div class="text-center text-sm text-gray-500">

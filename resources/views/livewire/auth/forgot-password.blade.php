@@ -20,26 +20,21 @@
                           placeholder="john@example.com"/>
         </div>
 
-        <div class="my-0 text-center text-sm justify-center flex space-x-2 text-gray-600 dark:text-gray-400">
-            <div>
-                Didn't receive the email?
-            </div>
-            <x-text-link :href="route('register')" class="font-medium">
-                Resend it
-            </x-text-link>
-        </div>
 
-        <x-button wire:click="submitForgotPasswordRequest" icon-left="heroicon-o-key">
+
+        <x-button wire:click="submitForgotPasswordRequest" wire-target="submitForgotPasswordRequest" icon-left="heroicon-o-key">
             Send password reset link
         </x-button>
     </form>
 
-    <div class="mt-2 text-center text-sm justify-center flex space-x-2 text-gray-600 dark:text-gray-400">
-        <div>
-            Not registered yet?
+    @if($this->submitted)
+        <div class="mt-2 text-center text-sm justify-center flex space-x-2 text-gray-600 dark:text-gray-400">
+            <div>
+                Didn't receive the email?
+            </div>
+            <x-text-link href="javascript:void(0)" wire:click="resendEmail" class="font-medium" icon="heroicon-o-arrow-top-right-on-square">
+                Resend it now
+            </x-text-link>
         </div>
-        <x-text-link :href="route('register')" class="font-medium" icon="heroicon-o-arrow-top-right-on-square">
-            Register now
-        </x-text-link>
-    </div>
+    @endif
 </div>
