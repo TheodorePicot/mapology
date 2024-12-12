@@ -3,10 +3,7 @@
         <div class="sm:flex sm:items-center sm:justify-between">
             <div class="flex justify-center sm:justify-start ">
                 <div class="space-x-2  dark:text-white flex items-center">
-                    <x-icon.logo class="size-16 text-primary-500"/>
-                    <div class="text-2xl font-semibold">
-                        Mapology
-                    </div>
+                    <img src="{{ asset('images/mapology-long.webp') }}" alt="Mapology logo" class="h-16">
                 </div>
             </div>
 

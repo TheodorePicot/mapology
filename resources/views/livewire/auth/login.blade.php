@@ -1,7 +1,7 @@
 <x-slot:max-width>max-w-xl lg:max-w-2xl</x-slot>
 <div class="space-y-8">
     <div class="flex flex-col items-center">
-        <x-icon.logo class="size-16 text-primary-500"/>
+        <img src="{{ asset('images/mapology-logo-only.webp') }}" alt="Mapology logo - login" class="h-16">
         <h2 class="mt-6 text-center text-3xl font-extrabold text-primary-900 dark:text-white">
             Sign in to your account
         </h2>

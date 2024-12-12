@@ -1,11 +1,13 @@
 <x-slot:max-width>max-w-2xl lg:max-w-3xl</x-slot>
 <div>
-    <x-icon.logo class="size-20 text-primary-500"/>
-    <h1 class="mt-6 text-2xl font-bold text-gray-900 dark:text-white sm:text-3xl md:text-4xl">
-        Welcome to Mapology 🌍
-    </h1>
+    <div class="flex flex-col items-center">
+        <img src="{{ asset('images/mapology-logo-only.webp') }}" alt="Mapology logo - login" class="h-16">
+        <h1 class="mt-6 text-2xl font-bold text-gray-900 dark:text-white sm:text-3xl md:text-4xl">
+            Welcome to Mapology 🌍
+        </h1>
+    </div>
 
-    <div class="flex flex-col lg:flex-row gap-4 mt-6">
+    <div class="flex flex-col lg:flex-row gap-4 mt-12">
         <div class="flex-1" x-data="{clicked: false}">
             <x-button href="{{ route('redirect.provider',  [App\Enums\OauthProvider::Github, $this->oauthAction]) }}" variant="primary-outline" @click="clicked=true">
                 <div x-show="!clicked">
