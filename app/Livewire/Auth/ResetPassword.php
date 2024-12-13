@@ -5,7 +5,6 @@ namespace App\Livewire\Auth;
 use App\Models\PasswordResetToken;
 use App\Models\User;
 use App\Rules\Password;
-use App\Services\PasswordResetService;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Locked;
@@ -25,18 +24,18 @@ class ResetPassword extends Component
 
     public function resetPassword() {
 
-        $validatedData = $this->validate([
-            'email' => 'required|email',
-            'password' => ['required', new Password],
-            'password_confirmation' => 'required|same:password'
-        ]);
-
         $passwordReset = PasswordResetToken::where('token', $this->token)->first();
 
         if ($passwordReset->isExpired()) {
             $passwordReset->delete();
             return redirect()->route('home')->with('error', 'Password reset token has expired, ask for a new one.');
         }
+
+        $validatedData = $this->validate([
+            'email' => 'required|email|in:' . $passwordReset->email,
+            'password' => ['required', new Password],
+            'password_confirmation' => 'required|same:password'
+        ]);
 
         User::where('email', $validatedData['email'])
             ->update(['password' => Hash::make($validatedData['password'])]);

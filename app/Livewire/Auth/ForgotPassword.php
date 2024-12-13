@@ -55,6 +55,7 @@ class ForgotPassword extends Component
             'expires_at' => $expiresAt
         ]);
 
+        $this->dispatch('flash', 'success', 'Reset email has been sent.');
         Mail::to($this->email)->queue(new ForgotPasswordMail($this->email, $token, $expiresAt));
 
         $this->submitted = true;

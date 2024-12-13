@@ -23,7 +23,7 @@ class EnsurePasswordResetTokenIsValid
 
         if (!empty($passwordReset) && $passwordReset->isExpired()) {
             $passwordReset->delete();
-            return redirect()->route('home')->with('error', 'Password reset token has expired');
+            return redirect()->route('home')->with('error', 'Password reset token has expired, ask for a new one.');
         }
 
         return $next($request);
