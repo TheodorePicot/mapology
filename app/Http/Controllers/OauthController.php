@@ -41,16 +41,12 @@ class OauthController extends Controller
     public function handleProviderCallback($provider)
     {
         try {
-            switch ($this->oauthService->getAction()) {
-                case OauthAction::Login:
-                    return $this->handleLoggingIn($provider);
-                case OauthAction::Register:
-                    return $this->handleRegistering($provider);
-                case OauthAction::Associate:
-                    return $this->handleAssociating($provider);
-                default:
-                    return redirect()->route('home');
-            }
+            return match ($this->oauthService->getAction()) {
+                OauthAction::Login => $this->handleLoggingIn($provider),
+                OauthAction::Register => $this->handleRegistering($provider),
+                OauthAction::Associate => $this->handleAssociating($provider),
+                default => redirect()->route('home'),
+            };
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             return redirect()->route('home');

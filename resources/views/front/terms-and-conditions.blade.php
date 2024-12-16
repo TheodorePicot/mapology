@@ -2,7 +2,7 @@
     <div class="max-w-screen-xl mx-auto p-8">
         <header class="mb-8">
             <h1 class="text-4xl font-bold text-primary-800 font-geist">Terms and Conditions</h1>
-            <p class="text-gray-600 mt-2">Last Updated: <span class="font-medium">{{ now()->format('F j, Y') }}</span></p>
+            <p class="text-gray-600 mt-2">Effective Date: <span class="font-medium">December 16, 2024</span></p>
         </header>
 
         <main>
@@ -18,7 +18,7 @@
 
             <section class="mb-8">
                 <h2 class="text-2xl font-bold text-primary-800">Use of the Website</h2>
-                <ul class="mt-2 space-y-2 text-gray-700 list-disc list-inside">
+                <ul class="mt-2 space-y-2 text-gray-700 list-disc list-inside px-4">
                     <li>You must be at least 18 years old to use this website.</li>
                     <li>You are responsible for ensuring that your use of the website complies with all applicable laws and regulations.</li>
                     <li>Unauthorized use of this website may give rise to a claim for damages or criminal offense.</li>
@@ -44,7 +44,7 @@
             <section class="mb-8">
                 <h2 class="text-2xl font-bold text-primary-800">Prohibited Activities</h2>
                 <p class="mt-2 text-gray-700">When using Mapology, you agree not to:</p>
-                <ul class="mt-2 space-y-2 text-gray-700 list-disc list-inside">
+                <ul class="mt-2 space-y-2 text-gray-700 list-disc list-inside px-4">
                     <li>Engage in any form of data scraping or automated access.</li>
                     <li>Upload or share malicious software or code.</li>
                     <li>Use the website for fraudulent or harmful purposes.</li>
@@ -71,7 +71,7 @@
                 <p class="mt-2 text-gray-700">
                     To the fullest extent permitted by law:
                 </p>
-                <ul class="mt-2 space-y-2 text-gray-700 list-disc list-inside">
+                <ul class="mt-2 space-y-2 text-gray-700 list-disc list-inside px-4">
                     <li>Mapology and its affiliates will not be held liable for any indirect, incidental, or consequential damages arising from your use of the website.</li>
                     <li>Our total liability will not exceed the amount you paid (if any) to access the website.</li>
                 </ul>
@@ -111,7 +111,7 @@
                 <p class="mt-2 text-gray-700">
                     If you have any questions or concerns about these Terms, please contact us at:
                 </p>
-                <ul class="mt-2 text-gray-700">
+                <ul class="mt-2 space-y-2 text-gray-700 list-disc list-inside px-4">
                     <li>Email: <a href="mailto:support@mapology.eu" class="text-blue-600 hover:underline">support@mapology.eu</a></li>
                     <li>Address: [Insert Business Address]</li>
                 </ul>

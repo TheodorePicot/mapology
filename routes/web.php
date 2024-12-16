@@ -6,6 +6,7 @@ use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
 use App\Livewire\Auth\ResetPassword;
 use App\Livewire\Auth\VerifyEmail;
+use App\Livewire\Front\Contact;
 use App\Livewire\User\Dashboard;
 use App\Services\OauthService;
 use App\Services\UsernameService;
@@ -77,4 +78,4 @@ Route::view('/terms-and-conditions', 'front.terms-and-conditions')->name('terms-
 
 Route::get('/become-contributor', function (){})->name('become-contributor');
 
-Route::get('/contact', function (){})->name('contact');
+Route::get('/contact', Contact::class)->name('contact');
