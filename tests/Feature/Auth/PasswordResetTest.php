@@ -297,3 +297,11 @@ it('successfully resets password if all data is valid', function () {
     $passwordReset = PasswordResetToken::where('email', $email)->first();
     expect($passwordReset)->toBeNull();
 });
+
+test('password reset email is sent without errors', function () {
+    Mail::fake();
+
+    Mail::to(fake()->safeEmail)->send(new ForgotPasswordMail(fake()->safeEmail, Str::random(40), now()->addMinutes(30)));
+
+    Mail::assertSent(ForgotPasswordMail::class, 1);
+});

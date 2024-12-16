@@ -11,6 +11,7 @@
         <div class="flex flex-col gap-4 ">
             <x-form.input id="email"
                           type="email"
+                          autocomplete="email"
                           name="email"
                           label="Email address"
                           placeholder="john@example.com"

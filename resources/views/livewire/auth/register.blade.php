@@ -49,6 +49,7 @@
                           type="text"
                           wire:model="username"
                           placeholder="geography_lover123"
+                          autocomplete="username"
                           name="username"
                           label="Display name"
                           required
@@ -58,6 +59,7 @@
                           name="email"
                           placeholder="john@example.com"
                           wire:model="email"
+                          autocomplete="email"
                           label="Email"
                           required/>
 

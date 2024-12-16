@@ -23,6 +23,10 @@ class Username implements ValidationRule
             $fail('The username must be at least 3 characters long.');
         }
 
+        if (strlen($value) > 255) {
+            $fail('The username cannot be longer than 255 characters.');
+        }
+
         if (!preg_match('/^[a-zA-Z0-9]/', $value)) {
             $fail('The username must start with a letter or number.');
         }

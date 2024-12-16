@@ -14,7 +14,7 @@
         @livewireStyles
         @livewireScripts
     </head>
-    <body class="font-sans antialiased">
+    <body class="antialiased">
         <x-base.navigation />
         <livewire:flash-base />
         <main class="pt-nav">

@@ -71,8 +71,10 @@ Route::get('/wikis', function () {})->name('wikis');
 
 Route::get('/quizzes', function () {})->name('quizzes');
 
-Route::get('/privacy-policy', function (){})->name('privacy-policy');
+Route::view('/privacy-policy', 'front.privacy-policy')->name('privacy-policy');
 
-Route::get('/terms-and-conditions', function (){})->name('terms-and-conditions');
+Route::view('/terms-and-conditions', 'front.terms-and-conditions')->name('terms-and-conditions');
 
 Route::get('/become-contributor', function (){})->name('become-contributor');
+
+Route::get('/contact', function (){})->name('contact');

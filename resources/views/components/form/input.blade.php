@@ -1,4 +1,4 @@
-@props(['id', 'name', 'label' => null, 'type' => 'text', 'placeholder' => null, 'value' => null, 'required' => false])
+@props(['id', 'name', 'label' => null, 'type' => 'text', 'placeholder' => null, 'value' => null, 'required' => false, 'autocomplete' => null])
 
 <div class="flex flex-col gap-2 flex-1" x-data>
     <label for="{{ $id }}" class="text-sm font-medium text-primary-800 dark:text-gray-200" {{ $label ? '' : 'hidden' }}>
@@ -18,6 +18,8 @@
                 name="{{ $name }}"
                 placeholder="{{ $placeholder }}"
                 value="{{ $value }}"
+                {{ $required ? 'required' : '' }}
+                {{ $autocomplete ? 'autocomplete="' . $autocomplete . '"' : '' }}
         />
         @error($name)
             <p class="absolute mt-1 text-xs text-red-600 dark:text-red-400">{{ $message }}</p>

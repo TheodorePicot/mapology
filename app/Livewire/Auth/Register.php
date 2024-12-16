@@ -4,7 +4,6 @@ namespace App\Livewire\Auth;
 
 use App\Enums\OauthAction;
 use App\Mail\Welcome;
-use App\Mail\VerifyEmail as VerifyEmailMail;
 use App\Models\User;
 use App\Rules\Password;
 use App\Rules\Username;

@@ -39,6 +39,7 @@ export default {
         },
         extend: {
             fontFamily: {
+                geist: ['Geist', 'sans-serif'],
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
             colors: {

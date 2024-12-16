@@ -41,6 +41,7 @@ class InstallMapology extends Command
                     'email' => $email,
                     'username' => 'administrator',
                     'password' => bcrypt($password),
+                    'email_verified_at' => now(),
                 ]
             );
             $user->assignRole(UserRole::Administrator);

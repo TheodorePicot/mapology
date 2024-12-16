@@ -8,7 +8,6 @@ use App\Mail\Welcome;
 use App\Models\User;
 use App\Services\OauthService;
 use App\Services\UsernameService;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
