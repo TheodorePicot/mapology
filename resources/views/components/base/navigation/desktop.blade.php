@@ -12,16 +12,19 @@
             </a>
         </div>
     </div>
-    @auth
-        <x-base.navigation.desktop-dropdown />
-    @else
-        <div class="flex items-center space-x-4" >
-            <x-button href="{{ route('login') }}" variant="secondary">
-                Login
-            </x-button>
-            <x-button href="{{ route('register') }}">
-                Register
-            </x-button>
-        </div>
-    @endauth
+    <div class="flex flex-row-reverse gap-4">
+        <livewire:language-switcher/>
+        @auth
+            <x-base.navigation.desktop-dropdown />
+        @else
+            <div class="flex items-center space-x-4" >
+                <x-button href="{{ route('login') }}" variant="secondary">
+                    Login
+                </x-button>
+                <x-button href="{{ route('register') }}">
+                    Register
+                </x-button>
+            </div>
+        @endauth
+    </div>
 </div>
