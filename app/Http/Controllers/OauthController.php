@@ -92,7 +92,7 @@ class OauthController extends Controller
 
             $user->uploadAvatar($socialiteUserInfo->avatar);
 
-            Mail::to($user->email)->queue(new Welcome($user));
+            Mail::to($user->email)->locale(session()->get('locale'))->queue(new Welcome($user));
 
             Auth::login($user, true);
             return redirect()->route('welcome');
@@ -113,7 +113,7 @@ class OauthController extends Controller
             $user->update([$provider . '_oauth_id' => $socialiteUser->id]);
 
             $providerLabel = OauthProvider::from($provider)->label();
-            session()->flash('success', "Your $providerLabel account has been associated with your Mapology account");
+            session()->flash('success', __("Your :provider account has been associated with your Mapology account", ['provider' => $providerLabel]));
 
             return redirect()->route('settings');
         }
@@ -132,7 +132,7 @@ class OauthController extends Controller
             return redirect()->route('dashboard');
         } else {
             $providerLabel = OauthProvider::from($provider)->label();
-            session()->flash('error', "The provided $providerLabel account is not associated with any Mapology account");
+            session()->flash('error', __("The provided :provider account is not associated with any Mapology account", ['provider' => $providerLabel]));
             return redirect()->route('login');
         }
     }

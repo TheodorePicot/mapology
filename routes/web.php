@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MailTester;
 use App\Http\Controllers\OauthController;
 use App\Livewire\Auth\ForgotPassword;
 use App\Livewire\Auth\Login;
@@ -11,6 +12,7 @@ use App\Livewire\User\Dashboard;
 use App\Services\OauthService;
 use App\Services\UsernameService;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -79,3 +81,10 @@ Route::view('/terms-and-conditions', 'front.terms-and-conditions')->name('terms-
 Route::get('/become-contributor', function (){})->name('become-contributor');
 
 Route::get('/contact', Contact::class)->name('contact');
+
+if (App::isLocal()) {
+    Route::get('/test-forgot-password-mail', [MailTester::class, 'reset_password_email_test']);
+    Route::get('/test-welcome-mail', [MailTester::class, 'welcome_email_test']);
+    Route::get('/test-verify-mail', [MailTester::class, 'verify_email_test']);
+    Route::get('/test-contact-mail', [MailTester::class, 'contact_email_test']);
+}

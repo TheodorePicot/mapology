@@ -17,16 +17,18 @@
         </div>
         <div class="py-2 " aria-labelledby="dropdownUserAvatarButton">
             <x-base.navigation.desktop-link href="{{ route('dashboard') }}">
-                Dashboard
+                {{ __('Dashboard') }}
             </x-base.navigation.desktop-link>
             <x-base.navigation.desktop-link href="{{ route('settings') }}">
-                Settings
+                {{ __('Settings') }}
             </x-base.navigation.desktop-link>
         </div>
         <div class="py-2 pb-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownUserAvatarButton">
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
-                <button type="submit" class="block w-full px-4 text-start py-2 text-sm text-gray-700 dark:text-gray-200 hover:text-red-700 hover:font-semibold hover:bg-red-200 dark:hover:text-red-100 dark:hover:bg-red-600">Logout</button>
+                <button type="submit" class="block w-full px-4 text-start py-2 text-sm text-gray-700 dark:text-gray-200 hover:text-red-700 hover:font-semibold hover:bg-red-200 dark:hover:text-red-100 dark:hover:bg-red-600">
+                    {{ __('Logout') }}
+                </button>
             </form>
         </div>
     </div>

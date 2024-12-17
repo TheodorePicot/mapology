@@ -3,7 +3,7 @@
     <div class="flex flex-col items-center">
         <img src="{{ asset('images/mapology-logo-only.webp') }}" alt="Mapology logo - login" class="h-16">
         <h2 class="mt-6 text-center text-3xl font-extrabold text-primary-900 dark:text-white">
-            Sign in to your account
+            {{ __('Sign in to your account') }}
         </h2>
     </div>
     <form class="mt-8 space-y-6" action="#" method="POST">
@@ -33,13 +33,13 @@
                 <a href="{{ route('forgot-password') . ( $this->email ? '?email=' . urlencode($email) : '' ) }}"
                    class="font-medium text-primary-500 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-300"
                 >
-                    Forgot password?
+                    {{ __('Forgot password?') }}
                 </a>
             </div>
         </div>
 
         <x-button wire:click="authenticate" wire-target="authenticate">
-            Sign in
+            {{ __('Sign in') }}
         </x-button>
     </form>
 
@@ -53,7 +53,7 @@
                 </div>
                 <x-icon.spinner x-show="clicked" x-cloak class="size-5 mr-3 text-primary-900 dark:text-white" />
                 <span :class="clicked ? 'opacity-50 dark:opacity-70' : 'opacity-100'" >
-                    Continue with GitHub
+                    {{ __('Continue with GitHub') }}
                 </span>
             </x-button>
         </div>
@@ -64,18 +64,21 @@
                 </div>
                 <x-icon.spinner x-show="clicked" x-cloak class="size-5 mr-3 text-primary-900 dark:text-white" />
                 <span :class="clicked ? 'opacity-50 dark:opacity-70' : 'opacity-100'">
-                    Continue with Google
+                    {{ __('Continue with Google') }}
                 </span>
             </x-button>
         </div>
     </div>
 
-    <div class="text-center text-sm text-gray-500">
-        Don't have an account?
+    <div class="flex gap-1 items-center w-full justify-center text-sm text-gray-500">
+        <div>
+            {{ __("Don't have an account?") }}
+        </div>
         <x-text-link
             :href="route('register')"
+            icon="heroicon-o-arrow-top-right-on-square"
             class="font-medium">
-            Register
+            {{ __('Register now') }}
         </x-text-link>
     </div>
 </div>

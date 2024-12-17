@@ -6,7 +6,7 @@
     @if($message)
         <div class="relative flex justify-center">
             <span class="px-2 bg-white dark:bg-gray-900 text-sm text-gray-500 dark:text-gray-400">
-                {{ $message }}
+                {{ __($message) }}
             </span>
         </div>
     @endif

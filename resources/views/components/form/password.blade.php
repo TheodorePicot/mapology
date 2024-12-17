@@ -2,7 +2,7 @@
 
 <div class="flex flex-col gap-2 flex-1" x-data="{ showPassword: false }">
     <label for="{{ $id }}" class="text-sm font-medium text-primary-800 dark:text-gray-200" {{ $label ? '' : 'hidden' }}>
-        {{ $label }}
+        {{ __($label) }}
         @if ($required)
             <span class="text-primary-400">*</span>
         @endif

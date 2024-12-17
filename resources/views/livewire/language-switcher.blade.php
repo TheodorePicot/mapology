@@ -1,4 +1,4 @@
-<div class="flex items-center md:order-2 space-x-1 md:space-x-0 rtl:space-x-reverse relative"
+<div class="flex items-center relative w-full lg:w-auto"
      x-data="{
      open: false,
       }"
@@ -6,7 +6,7 @@
     <button x-on:click="open=!open"
             type="button"
             data-dropdown-toggle="language-dropdown-menu"
-            class="inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-gray-900 dark:text-white rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+            class="inline-flex items-center w-full lg:w-auto font-medium justify-center px-4 py-2.5 text-sm text-gray-900 dark:text-white rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
         <x-dynamic-component :component="'icon.language.'.$this->currentLanguageTag" class="size-5 mr-2 rounded-lg" />
         {{ $this->currentLanguageName }}
     </button>
@@ -19,17 +19,11 @@
          x-transition:leave-start="transform scale-100 opacity-100"
          x-transition:leave-end="transform scale-95 opacity-0"
          x-cloak
-         class="z-50 absolute top-7 right-1 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700">
+         class="z-50 absolute lg:w-auto w-full top-7 right-1 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700">
         <ul class="py-2 font-medium" role="none">
             @foreach($this->availableLanguages as $languageName => $languageTag)
                 <x-base.language.item :languageTag="$languageTag" :languageName="$languageName" wire:click="setLanguage('{{ $languageTag }}')" @click="open=false" />
             @endforeach
         </ul>
     </div>
-    <button @click="open=!open" data-collapse-toggle="navbar-language" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-language" aria-expanded="false">
-        <span class="sr-only">Open main menu</span>
-        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-        </svg>
-    </button>
 </div>

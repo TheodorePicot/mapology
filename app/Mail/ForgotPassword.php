@@ -32,7 +32,7 @@ class ForgotPassword extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Reset your password -'. config('app.name'),
+            subject: __('Reset your password') . ' - ' . config('app.name'),
         );
     }
 

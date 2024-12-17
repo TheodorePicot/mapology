@@ -3,7 +3,7 @@
     <div class="flex flex-col items-center">
         <img src="{{ asset('images/mapology-logo-only.webp') }}" alt="Mapology logo - login" class="h-16">
         <h1 class="mt-6 text-2xl font-bold text-gray-900 dark:text-white sm:text-3xl md:text-4xl">
-            Welcome to Mapology 🌍
+            {{ __('Welcome to Mapology') }}🌍
         </h1>
     </div>
 
@@ -15,7 +15,7 @@
                 </div>
                 <x-icon.spinner x-show="clicked" x-cloak class="size-5 mr-3 text-primary-900 dark:text-white"/>
                 <span :class="clicked ? 'opacity-50 dark:opacity-70' : 'opacity-100'" >
-                    Continue with GitHub
+                    {{ __('Continue with GitHub') }}
                 </span>
             </x-button>
         </div>
@@ -26,14 +26,14 @@
                 </div>
                 <x-icon.spinner x-show="clicked" x-cloak class="size-5 mr-3 text-primary-900 dark:text-white"/>
                 <span :class="clicked ? 'opacity-50 dark:opacity-70' : 'opacity-100'">
-                    Continue with Google
+                    {{ __('Continue with Google') }}
                 </span>
             </x-button>
         </div>
     </div>
 
     <div class="my-6">
-        <x-form.separator message="Or"/>
+        <x-form.separator message="or"/>
     </div>
 
     <form action="#" class="flex flex-col w-full my-2 gap-3">
@@ -72,19 +72,15 @@
             <x-form.password id="password-confirmation"
                              name="password_confirmation"
                              wire:model="password_confirmation"
-                             label="Password Confirmation"
+                             label="Password confirmation"
                              required/>
 
             <div class="flex flex-col gap-4 mt-2">
-                <x-form.checkbox id="marketing"
-                                 name="marketing"
-                                 label="I want to receive emails about events, feature updates and mapology announcements."/>
-
                 <p class="text-sm text-gray-500">
-                    By creating an account, you agree to our
-                    <x-text-link :href="route('terms-and-conditions')" underline>terms and conditions</x-text-link>
-                    and
-                    <x-text-link :href="route('privacy-policy')" underline>privacy policy</x-text-link>
+                    {{ __('By creating an account, you agree to our') }}
+                    <x-text-link :href="route('terms-and-conditions')" underline>{{ __('terms and conditions') }}</x-text-link>
+                    {{ __('and') }}
+                    <x-text-link :href="route('privacy-policy')" underline>{{ __('privacy policy') }}</x-text-link>
                 </p>
 
                 <div class="flex gap-4 items-center">
@@ -93,8 +89,9 @@
                     </x-button>
 
                     <p class="text-sm flex-1 text-primary-800 dark:text-gray-200">
-                        Already have an account?
-                        <x-text-link :href="route('login')" class="font-medium">Log in</x-text-link>
+                        {{ __('Already have an account?') }}
+
+                        <x-text-link :href="route('login')" class="font-medium">{{ __('Log in') }}</x-text-link>
                     </p>
                 </div>
             </div>

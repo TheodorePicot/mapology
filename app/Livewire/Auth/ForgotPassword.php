@@ -56,7 +56,7 @@ class ForgotPassword extends Component
         ]);
 
         $this->dispatch('flash', 'success', 'Reset email has been sent.');
-        Mail::to($this->email)->queue(new ForgotPasswordMail($this->email, $token, $expiresAt));
+        Mail::to($this->email)->locale(session()->get('locale'))->queue(new ForgotPasswordMail($this->email, $token, $expiresAt));
 
         $this->submitted = true;
     }
@@ -73,7 +73,7 @@ class ForgotPassword extends Component
         $passwordReset = PasswordResetToken::where('email', $this->email)->first();
 
         if ($passwordReset && !$passwordReset->expires_at->isPast()) {
-            Mail::to($this->email)->queue(new ForgotPasswordMail($this->email, $passwordReset->token, $passwordReset->expires_at));
+            Mail::to($this->email)->locale(session()->get('locale'))->queue(new ForgotPasswordMail($this->email, $passwordReset->token, $passwordReset->expires_at));
             $this->dispatch('flash', 'success', 'Reset email resent.');
             RateLimiter::hit($throttleKey);
         } else {

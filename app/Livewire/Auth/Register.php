@@ -55,7 +55,7 @@ class Register extends Component
         }
 
         event(new Registered($user));
-        Mail::to($user->email)->queue(new Welcome($user));
+        Mail::to($user->email)->locale(session()->get('locale'))->queue(new Welcome($user));
 
         Auth::login($user);
 
@@ -69,17 +69,6 @@ class Register extends Component
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'confirmed', new Password],
             'password_confirmation' => ['required'],
-        ];
-    }
-
-    protected function validationAttributes()
-    {
-        return [
-            'username' => 'display name',
-            'email' => 'email',
-            'password' => 'password',
-            'password_confirmation' => 'password confirmation',
-            'avatar' => 'avatar',
         ];
     }
 }

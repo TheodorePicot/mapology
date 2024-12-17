@@ -8,22 +8,30 @@
             </a>
             <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
                 <li>
-                    <a href="{{ route('become-contributor') }}" class="hover:underline me-4 md:me-6">Become a contributor</a>
+                    <a href="{{ route('become-contributor') }}" class="hover:underline me-4 md:me-6">
+                        {{ __('Become a contributor') }}
+                    </a>
                 </li>
                 <li>
-                    <a href="{{ route('privacy-policy') }}" class="hover:underline me-4 md:me-6">Privacy Policy</a>
+                    <a href="{{ route('privacy-policy') }}" class="hover:underline me-4 md:me-6">
+                        {{ __('Privacy Policy') }}
+                    </a>
                 </li>
                 <li>
-                    <a href="{{ route('terms-and-conditions') }}" class="hover:underline me-4 md:me-6">Terms and conditions</a>
+                    <a href="{{ route('terms-and-conditions') }}" class="hover:underline me-4 md:me-6">
+                        {{ __('Terms and Conditions') }}
+                    </a>
                 </li>
                 <li>
-                    <a href="{{ route('contact') }}" class="hover:underline">Contact</a>
+                    <a href="{{ route('contact') }}" class="hover:underline">
+                        {{ __('Contact') }}
+                    </a>
                 </li>
             </ul>
         </div>
         <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
         <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">
-                Copyright &copy; 2024. All rights reserved.
+            {{ __('Copyright © 2024. All rights reserved.') }}
         </span>
     </div>
 </footer>

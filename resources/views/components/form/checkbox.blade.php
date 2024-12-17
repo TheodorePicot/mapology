@@ -10,6 +10,6 @@
            @disabled($disabled)
     >
     <label for="{{ $id }}" class="ml-2 block text-sm font-medium text-primary-800 dark:text-gray-300">
-        {{ $label }}
+        {{ __($label) }}
     </label>
 </div>

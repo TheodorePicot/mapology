@@ -29,7 +29,7 @@ class Welcome extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Welcome',
+            subject: __('Welcome to Mapology') . ' - ' . config('app.name'),
         );
     }
 

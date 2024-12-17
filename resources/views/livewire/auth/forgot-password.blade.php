@@ -2,10 +2,10 @@
 <div class="space-y-6">
     <div class="flex flex-col items-center">
         <h2 class="text-center text-2xl md:text-3xl font-extrabold text-primary-900 dark:text-white">
-            Forgot your password?
+            {{ __('Forgot your password') }}?
         </h2>
         <p class="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
-            Enter your email address below and we'll send you a link to reset your password.
+            {{ __("Enter your email address below and we'll send you a link to reset your password.") }}
         </p>
     </div>
 
@@ -23,17 +23,17 @@
 
 
         <x-button wire:click="submitForgotPasswordRequest" wire-target="submitForgotPasswordRequest" icon-left="heroicon-o-key">
-            Send password reset link
+            {{ __('Send password reset link') }}
         </x-button>
     </form>
 
     @if($this->submitted)
         <div class="mt-2 text-center text-sm justify-center flex space-x-2 text-gray-600 dark:text-gray-400">
             <div>
-                Didn't receive the email?
+                {{ __("Didn't receive the email") }}?
             </div>
             <x-text-link href="javascript:void(0)" wire:click="resendEmail" class="font-medium" icon="heroicon-o-arrow-top-right-on-square">
-                Resend it now
+                {{ __('Resend it now') }}
             </x-text-link>
         </div>
     @endif

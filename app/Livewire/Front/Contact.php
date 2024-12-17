@@ -32,9 +32,10 @@ class Contact extends Component
 
         if (RateLimiter::tooManyAttempts($throttleKey, 2)) {
             $seconds = RateLimiter::availableIn($throttleKey);
-            $minutes = intval($seconds / 60);
-            $this->dispatch('flash', 'warning', __('You\'ve tried sending a contact request too many times. Please try again in ' . ($minutes > 1 ? "$minutes minutes" : "$seconds seconds"). '.', [
-                'seconds' => $seconds,
+            $this->dispatch('flash', 'error', __("You've tried sending a contact email too many times. Please try again in :time.", [
+                'time' => $seconds > 60
+                    ? __(':minutes minutes', ['minutes' => ceil($seconds / 60)])
+                    : __(':seconds seconds', ['seconds' => $seconds])
             ]));
             return;
         }

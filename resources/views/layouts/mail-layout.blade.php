@@ -16,7 +16,7 @@
                     <table class="w-full" style="width: 100%; max-width: 600px;" cellpadding="0" cellspacing="0" role="presentation">
                         <tr>
                             <td style="padding: 20px; text-align: center; font-size: 20px">
-                                Mapology
+                                <img src="{{ asset('images/mapology-long.webp') }}" alt="Mapology logo" height="40">
                             </td>
                         </tr>
                         {{ $slot }}
@@ -25,14 +25,14 @@
                                 @if ($showUnsubscribeFooter)
                                     <p style="margin-bottom: 5px;">
                                         This email was sent to
-                                        <a href="mailto:contact@mapology.eu" style="color: #007bff; text-decoration: none;">{{ $email }}</a>.
+                                        <a href="mailto:{{ $email }}" style="color: #007bff; text-decoration: none;">{{ $email }}</a>.
                                         If you'd rather not receive this kind of email, you can
                                         <a href="#" style="color: #007bff; text-decoration: none;">unsubscribe</a> or
                                         <a href="#" style="color: #007bff; text-decoration: none;">manage your email preferences</a>.
                                     </p>
                                 @endif
                                 <p>
-                                    &copy; <span style="color: #333333;">2024</span> Mapology. All Rights Reserved.
+                                    {{ __('Copyright © 2024. All rights reserved.') }}
                                 </p>
                             </td>
                         </tr>
